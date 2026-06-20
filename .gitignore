@@ -1,0 +1,30 @@
+.env
+
+
+# Python cache
+**/__pycache__/
+
+
+# Checkpoints and logs during training
+checkpoints/
+logs/
+*.zip
+*.npz
+
+
+# Virtual Environment
+venv/
+.venv/
+
+
+# Heavy Datasets (Network Traces)
+data/cooked_traces/
+data/cooked_test_traces/
+
+
+
+
+# Ignore compiled python files
+*.pyc
+*.pyo
+*.pyd

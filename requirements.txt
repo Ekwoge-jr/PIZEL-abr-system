@@ -1,0 +1,1 @@
+use "pip freeze > requirements.txt" to record all the required dependences

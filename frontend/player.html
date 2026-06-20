@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ABR Video Player</title>
+</head>
+
+<body>
+
+    <h2>Remote Lab Stream</h2>
+
+    <video
+        id="videoPlayer"
+        controls
+        autoplay
+        width="900"
+        height="500"
+    ></video>
+
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+
+    <script type="module" src="player.js"></script>
+    <script type="module" src="roi_client.js"></script>
+    <script type="module" src="broker.js"></script>
+    <script type="module" src="rl_engine.js"></script>
+
+
+    
+
+</body>
+</html>

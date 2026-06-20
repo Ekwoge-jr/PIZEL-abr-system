@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ROI Configuration</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            margin:40px;
+        }
+
+        #container{
+            position:relative;
+            display:inline-block;
+        }
+
+        #labImage{
+            max-width:900px;
+            border:1px solid #ccc;
+        }
+
+        #selectionBox{
+            position:absolute;
+            border:2px solid red;
+            display:none;
+            pointer-events:none;
+        }
+
+        button{
+            margin-top:20px;
+            padding:10px 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Configure ROI</h2>
+
+
+
+    <h3>Create Lab</h3>
+
+    <form id="uploadForm">
+
+        <input
+            type="text"
+            id="labName"
+            placeholder="Lab Name"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="file"
+            id="imageFile"
+            accept="image/*"
+            required
+        >
+
+        <br><br>
+
+        <input
+            type="file"
+            id="videoFile"
+            accept="video/*"
+            required
+        >
+
+        <br><br>
+
+        <button type="submit">
+            Upload Lab
+        </button>
+
+    </form>
+
+    <hr>
+
+
+
+    <div id="container">
+
+        <canvas id="roiCanvas"></canvas>
+
+    </div>
+
+    <br>
+
+    <button id="saveBtn">
+        Save ROI
+    </button>
+
+    <script src="roi-config.js"></script>
+
+
+    <h3>Selected ROIs</h3>
+
+    <ul id="roiList"></ul>
+
+    
+</body>
+</html>
