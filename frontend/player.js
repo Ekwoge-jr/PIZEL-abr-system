@@ -6,6 +6,11 @@ import {
     incrementChunkCounter
 } from "./state_builder.js";
 
+
+import {logDecisionPoint,initializeVideoMetrics,recordQualitySwitch} from "./metrics_logger.js";
+
+
+
 const video =
     document.getElementById(
         "videoPlayer"
@@ -13,8 +18,17 @@ const video =
 
 video.muted = true;
 
+
+initializeVideoMetrics(
+    video
+);
+
+let currentAction = 1;
+
+
 const url =
-    "http://localhost:5000/api/dash/manifest.mpd";
+    //"http://localhost:5000/api/dash/manifest.mpd";
+    "http://192.168.0.103:5000/api/dash/manifest.mpd";
 
 const player =
     dashjs.MediaPlayer().create();
@@ -180,6 +194,23 @@ player.on(
 
 
 
+        logDecisionPoint({
+
+            throughput: throughputBps,
+
+            buffer,
+
+            downloadTime,
+
+            bitrate,
+
+            action:
+                currentAction
+
+        });
+
+
+        
         broker.publish(
             "network_metrics",
             {
@@ -202,6 +233,8 @@ broker.subscribe(
             data.representation
         );
 
+        currentAction = data.representation;
+
         console.log(
             "Switching to representation:",
             data.representation
@@ -213,6 +246,8 @@ broker.subscribe(
 player.on(
     dashjs.MediaPlayer.events.QUALITY_CHANGE_RENDERED,
     (e) => {
+
+        recordQualitySwitch();
 
         console.log(
             "Quality switched"

@@ -3,12 +3,15 @@ from pathlib import Path
 from services.roi_encoder import build_roi_filter
 
 
-def generate_dash_stream(lab_id):
+def generate_dash_stream(vid_path, lab_id):
 
     ## path to the test video
-    input_video = (
-        Path(__file__).parent.parent/ "media"/ "test_video.mp4"
-    )
+    #input_video = (
+        #Path(__file__).parent.parent/ "media"/ "test_video.mp4"
+    #)
+
+    input_video = vid_path
+
 
     output_dir = ( Path(__file__).parent.parent/ "dash_server" )
     segments_dir = output_dir / "segments"
@@ -37,7 +40,7 @@ def generate_dash_stream(lab_id):
         "-filter_complex",
 
         (
-           ## "[0:v]split=3[v1][v2][v3];"
+            ##"[0:v]split=3[v1][v2][v3];"
             f"[0:v]{roi_filter},split=3[v1][v2][v3];"
             "[v1]scale=640:360[out1];"
             "[v2]scale=854:480, setdar=16/9[out2];"

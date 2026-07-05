@@ -11,7 +11,9 @@ class RemoteLab(db.Model):
 
     name = db.Column(db.String(100))
 
-    stream_url = db.Column(db.String(255))
+    image_url = db.Column(db.String(255))
+    
+    video_url = db.Column(db.String(255))
 
 
 

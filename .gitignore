@@ -22,6 +22,9 @@ data/cooked_traces/
 data/cooked_test_traces/
 
 
+media/
+
+
 
 
 # Ignore compiled python files

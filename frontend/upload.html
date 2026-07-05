@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Remote Laboratory Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-xl max-w-md w-full backdrop-blur-md">
+        <div class="flex items-center gap-2 text-xs font-bold text-blue-600 tracking-wider uppercase mb-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+            Step 1 of 2: Initialization
+        </div>
+        <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight mb-1">Initialize Lab Stream</h2>
+        <p class="text-xs text-slate-500 mb-6 leading-relaxed">Provide structural name identifiers and upload full-frame assets before mapping specific target focus metrics.</p>
+        
+        <form id="uploadForm" class="space-y-5">
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-2 tracking-wide">Laboratory Title Name</label>
+                <input type="text" id="labName" required placeholder="e.g., Fluid Dynamics Oscilloscope" class="w-full border border-slate-200 rounded-xl p-3 text-sm bg-slate-50/50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-2 tracking-wide">Full-Frame Reference Snapshot (.png/.jpg)</label>
+                <input type="file" id="imageFile" accept="image/*" required class="w-full border border-slate-200 rounded-xl p-2.5 text-sm bg-slate-50/50 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer">
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-2 tracking-wide">Live Video Feed Source Asset File</label>
+                <input type="file" id="videoFile" accept="video/*" required class="w-full border border-slate-200 rounded-xl p-2.5 text-sm bg-slate-50/50 file:mr-4 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 file:transition-colors cursor-pointer">
+            </div>
+            
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-semibold p-3.5 rounded-xl text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 mt-2">
+                Configure Regions (Next)
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Open local client database for large asset tracking persistence
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open("LabUploadCacheDB", 1);
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains("assets")) {
+                        db.createObjectStore("assets");
+                    }
+                };
+                request.onsuccess = (e) => resolve(e.target.result);
+                request.onerror = (e) => reject(e.target.error);
+            });
+        }
+
+        function setItemIndexedDB(key, value) {
+            return initDB().then(db => {
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction("assets", "readwrite");
+                    const store = tx.objectStore("assets");
+                    const request = store.put(value, key);
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            });
+        }
+
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('labName')) {
+                document.getElementById('labName').value = sessionStorage.getItem('labName');
+            }
+        });
+
+        document.getElementById("uploadForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            
+            const name = document.getElementById("labName").value;
+            const imageFile = document.getElementById("imageFile").files[0];
+            const videoFile = document.getElementById("videoFile").files[0];
+
+            try {
+                // Persist actual large binary files inside local IndexedDB instances safely
+                await setItemIndexedDB("videoBlob", videoFile);
+                await setItemIndexedDB("imageBlob", imageFile);
+                sessionStorage.setItem('labName', name);
+
+                // Use reader purely to generate immediate layout views on next view instance configuration
+                const imageReader = new FileReader();
+                imageReader.onload = function(e) {
+                    sessionStorage.setItem('tempImage', e.target.result);
+                    window.location.href = 'roi-config.html';
+                };
+                imageReader.readAsDataURL(imageFile);
+            } catch (err) {
+                console.error("Local caching error context: ", err);
+                alert("Failed to structure local client files storage space.");
+            }
+        });
+    </script>
+</body>
+</html>

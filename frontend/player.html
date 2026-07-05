@@ -1,4 +1,106 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Terminal — Remote Engineering Lab Stream</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur px-8 py-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <div class="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-ping"></div>
+            <h1 class="text-md font-semibold tracking-wide text-slate-200">Active Workstation Terminal</h1>
+        </div>
+        <div class="text-xs font-mono text-slate-400 bg-slate-800 px-3 py-1 rounded-md">
+            Node Gateway Link Status: <span class="text-emerald-400 font-bold">Online</span>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 flex flex-col space-y-4">
+            <div class="bg-black rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative aspect-video group">
+                <video id="videoPlayer" controls autoplay class="w-full h-full object-contain"></video>
+                <div class="absolute top-4 left-4 pointer-events-none bg-slate-950/80 backdrop-blur text-[10px] tracking-widest font-mono text-indigo-400 uppercase px-2 py-1 rounded border border-slate-800">
+                    Live DASH Output Interface Pipeline
+                </div>
+            </div>
+            
+            <div class="bg-slate-950 border border-slate-800 rounded-xl p-5">
+                <h3 class="text-sm font-bold text-white mb-1">Experiment Interface Workspace Overview</h3>
+                <p class="text-xs text-slate-400 leading-relaxed">The active video matrix layers are managed on the server side using spatial quantization parameters ($QP$), prioritizing regions of interest specified inside administrative console configurations.</p>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between h-full">
+                <div>
+                    <h2 class="text-sm font-bold tracking-wider text-slate-300 uppercase mb-4 border-b border-slate-800 pb-2">Reinforcement Learning Telemetry Matrix</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-900/50 border border-slate-800/80 rounded-xl p-3.5 flex justify-between items-center">
+                            <div>
+                                <p class="text-[10px] uppercase font-bold tracking-wider text-slate-500">Current Allocated Throughput</p>
+                                <p id="telemetryBitrate" class="text-lg font-mono font-bold text-indigo-400 mt-0.5">-- <span class="text-xs font-normal text-slate-500">Kbps</span></p>
+                            </div>
+                            <div class="h-8 w-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-sm">⚡</div>
+                        </div>
+
+                        <div class="bg-slate-900/50 border border-slate-800/80 rounded-xl p-3.5 flex justify-between items-center">
+                            <div>
+                                <p class="text-[10px] uppercase font-bold tracking-wider text-slate-500">Decoupled Playback Safety Cushion</p>
+                                <p id="telemetryBuffer" class="text-lg font-mono font-bold text-emerald-400 mt-0.5">-- <span class="text-xs font-normal text-slate-500">Sec</span></p>
+                            </div>
+                            <div class="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-sm">⏱</div>
+                        </div>
+
+                        <div class="bg-slate-900/50 border border-slate-800/80 rounded-xl p-3.5 flex justify-between items-center">
+                            <div>
+                                <p class="text-[10px] uppercase font-bold tracking-wider text-slate-500">Network State Classification Layer</p>
+                                <p id="telemetryThroughput" class="text-lg font-mono font-bold text-amber-400 mt-0.5">-- <span class="text-xs font-normal text-slate-500">Mbps</span></p>
+                            </div>
+                            <div class="h-8 w-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 text-sm">📡</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500 font-mono">
+                    <span>PPO Engine Controller Model:</span>
+                    <span class="text-indigo-400 bg-indigo-950/50 border border-indigo-900 px-2 py-0.5 rounded">Active ONNX Worker</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script type="module" src="player.js"></script>
+    <script type="module" src="roi_client.js"></script>
+    <script type="module" src="broker.js"></script>
+    <script type="module" src="rl_engine.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
 <html>
 <head>
     <title>ABR Video Player</title>
@@ -24,9 +126,6 @@
     <script type="module" src="roi_client.js"></script>
     <script type="module" src="broker.js"></script>
     <script type="module" src="rl_engine.js"></script>
-
-
-    
-
 </body>
 </html>
+-->
