@@ -19,7 +19,7 @@ def build_roi_filter(lab_id):
                 f"y={roi['y']}:"
                 f"w={roi['width']}:"
                 f"h={roi['height']}:"
-                f"qoffset=-0.1"
+                f"qoffset=-0.8"
             )
         )
 

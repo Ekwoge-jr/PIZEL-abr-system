@@ -27,8 +27,7 @@ let currentAction = 1;
 
 
 const url =
-    //"http://localhost:5000/api/dash/manifest.mpd";
-    "http://192.168.0.103:5000/api/dash/manifest.mpd";
+    "http://localhost:5000/api/dash/manifest.mpd";
 
 const player =
     dashjs.MediaPlayer().create();
@@ -157,18 +156,8 @@ player.on(
             "================================"
         );
 
-        //console.log(req)
-        //console.log("trequest =", req.trequest)
-        //console.log("tfinish =", req.tfinish)
-        //console.log("REQUEST OBJECT", e.request);
-
         console.log(
             "SEGMENT COMPLETED"
-        );
-
-        console.log(
-            "URL:",
-            req.url
         );
 
         console.log(

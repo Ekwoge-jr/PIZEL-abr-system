@@ -1,5 +1,6 @@
 .env
 
+.mpd
 
 # Python cache
 **/__pycache__/
@@ -23,6 +24,10 @@ data/cooked_test_traces/
 
 
 media/
+
+dash_server/segments/0
+dash_server/segments/1
+dash_server/segments/2
 
 
 
